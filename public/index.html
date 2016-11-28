@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="vendor/jquery/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="vendor/jquery/jquery.timer.min.js"></script>
+<title>Alarm list</title>
+</head>
+
+<table id="alarm-table" style="background-color:white" cellspacing="0" cellpadding="3" border="1">
+  <tr>
+    <th>时间</th>
+    <th>类型</th>
+    <th>内容</th>
+  </tr>
+</table>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  var alarm_timer = $.timer.init
+  ({
+    iTimerDelay: 1000,
+    cRepeatType: 'interval',
+    bDebug: false,
+  });
+  var funcUpdateAlarms = function() {
+    $.get("../api/v1/alarms",
+      function(data,status){
+      if(status == "success") {
+        var result = JSON.parse(data)
+        if(result.code == 0) {
+          // API success
+          $("#alarm-table tr:gt(0)").remove();
+          for(var key in result.data) {
+            var alarm = result.data[key]
+            $("#alarm-table tr:last").after("<tr><td>"+alarm["rise-at"]+"</td><td>"+
+              alarm["type"]+"</td><td>"+alarm.content+"</td></tr>");
+          }
+        }
+      }
+      });
+  };
+  alarm_timer.addEventListener("timer", funcUpdateAlarms);
+  alarm_timer.start();
+});
+</script>
+</html>
