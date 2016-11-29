@@ -46,8 +46,8 @@ func Rise(t, content string) string {
 }
 
 func Remove(id string) {
-	glog.Infoln("alarm::Remove")
-	defer glog.Infoln("alarm::Remove end")
+	glog.V(3).Infoln("alarm::Remove")
+	defer glog.V(3).Infoln("alarm::Remove end")
 	lock.Lock()
 	defer lock.Unlock()
 	if _, found := list[id]; found {
