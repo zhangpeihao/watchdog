@@ -53,10 +53,6 @@
 			"Rev": "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
 		},
 		{
-			"ImportPath": "github.com/kardianos/osext",
-			"Rev": "c2c54e542fb797ad986b31721e1baedf214ca413"
-		},
-		{
 			"ImportPath": "github.com/kr/fs",
 			"Rev": "2788f0dbd16903de03cb8186e5c7d97b69ad387b"
 		},
@@ -86,11 +82,6 @@
 		{
 			"ImportPath": "github.com/pkg/sftp",
 			"Rev": "4d0e916071f68db74f8a73926335f809396d6b42"
-		},
-		{
-			"ImportPath": "github.com/sevlyar/go-daemon",
-			"Comment": "v0.1.0-5-g8577c7d",
-			"Rev": "8577c7ddef908e104dae56c9e46f0956cb33c844"
 		},
 		{
 			"ImportPath": "github.com/spf13/afero",
