@@ -33,8 +33,8 @@ type NginxStatusResult struct {
 
 // Create a new watch job for nginx status page
 func NewNginxStatus(page string) (job WatchJob, err error) {
-	glog.Info("watchdog::NewNginxStatus")
-	defer glog.Info("watchdog::NewNginxStatus end")
+	glog.V(3).Info("watchdog::NewNginxStatus")
+	defer glog.V(3).Info("watchdog::NewNginxStatus end")
 	w := &nginxStatus{
 		page:       page,
 		client:     new(http.Client),
@@ -49,7 +49,7 @@ func NewNginxStatus(page string) (job WatchJob, err error) {
 
 func (w *nginxStatus) Watch() {
 
-	glog.Infoln("Start watch nginx status page:", w.page)
+	glog.V(3).Infoln("Start watch nginx status page:", w.page)
 	resp, err := w.client.Get(w.page)
 	if err != nil {
 		glog.Warningln("Get", w.page, "error:", err.Error())
@@ -107,7 +107,7 @@ func (w *nginxStatus) Watch() {
 	}
 
 	for host, _ := range recoredHosts {
-		if s, found := w.errorHosts[host]; !found {
+		if s, found := w.errorHosts[host]; found {
 			glog.Infoln("Host[", s.Name, "-", host, "] recovered")
 			alarm.Remove(s.AlarmId)
 			// TODO: Stop the alarm from monitor

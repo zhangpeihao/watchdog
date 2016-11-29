@@ -12,8 +12,8 @@ type WatchJob func()
 
 // Run watch jobs by interval setting
 func RunWatchJob(jobs []WatchJob, interval time.Duration) {
-	glog.Infoln("watchdog::RunWatchJob")
-	defer glog.Infoln("watchdog::RunWatchJob end")
+	glog.V(3).Infoln("watchdog::RunWatchJob")
+	defer glog.V(3).Infoln("watchdog::RunWatchJob end")
 	wait.Until(func() {
 		for _, job := range jobs {
 			job()

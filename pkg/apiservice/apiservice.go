@@ -17,8 +17,8 @@ type ApiResponse struct {
 }
 
 func HandleFunc(w http.ResponseWriter, r *http.Request) {
-	glog.Infoln("apiservice::HandleFunc()", r.URL.Path)
-	defer glog.Infoln("apiservice::HandleFunc end")
+	glog.V(3).Infoln("apiservice::HandleFunc()", r.URL.Path)
+	defer glog.V(3).Infoln("apiservice::HandleFunc end")
 	switch r.URL.Path {
 	case "/api/v1/alarms":
 		var alarms alarm.Alarms

@@ -29,8 +29,8 @@ func (a Alarms) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a Alarms) Less(i, j int) bool { return a[i].RiseAt < a[j].RiseAt }
 
 func Rise(t, content string) string {
-	glog.Infoln("alarm::Rise " + t + "," + content)
-	defer glog.Infoln("alarm::Rise end")
+	glog.V(3).Infoln("alarm::Rise " + t + "," + content)
+	defer glog.V(3).Infoln("alarm::Rise end")
 	lock.Lock()
 	defer lock.Unlock()
 	a := Alarm{

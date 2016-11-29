@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"time"
 
+	//"github.com/VividCortex/godaemon"
 	"github.com/golang/glog"
 	"github.com/spf13/cobra"
 
@@ -30,6 +31,7 @@ Start watchdog services.
 }
 
 func run(cmd *cobra.Command, args []string) {
+	//godaemon.MakeDaemon(&godaemon.DaemonAttr{})
 	startWatch(cmd)
 }
 
@@ -68,16 +70,16 @@ func startWatch(cmd *cobra.Command) {
 		return
 	}
 	http.HandleFunc("/api/v1/", apiservice.HandleFunc)
-	glog.Infoln(http.Dir(webui_root))
 	http.Handle("/webui/", http.StripPrefix("/webui/", http.FileServer(http.Dir(webui_root))))
 	http.ListenAndServe(fmt.Sprintf("%s:%d", cfgWebUIHost, cfgWebUIPort), nil)
 }
 
 func init() {
+
 	RootCmd.AddCommand(startCmd)
 
 	startCmd.PersistentFlags().StringSlice("nginx-status-page", nil, "The nginx status page to watch.")
-	startCmd.PersistentFlags().String("webui-root", "public", "The root folder of webui.")
+	startCmd.PersistentFlags().String("webui-root", "public", "The root folder of web UI.")
 
 	startCmd.Flags().Duration("watch-frenquency", 10*time.Second, "The interval between every update of the nginx status page.")
 
